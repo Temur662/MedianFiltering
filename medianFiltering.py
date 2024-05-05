@@ -51,7 +51,7 @@ def filterImage():
                 nByNBox = extract_nxn_subarray(imgArr, pixelRow, pixelCol, windowSize)
                 # Use flatten method to turn 2d array into 1d array for filtering
                 nByNBox = nByNBox.flatten()
-                imgArr[pixelRow,pixelCol] = orderStat.orderStatistics(threeByThreeBox, len(threeByThreeBox) // 2)
+                imgArr[pixelRow,pixelCol] = orderStat.orderStatistics(nByNBox, len(nByNBox) // 2)
         filterdImage = img.fromarray(imgArr)
         filterdImage.show()
         
