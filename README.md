@@ -1,2 +1,3 @@
-#CSC382 Final Project
+CSC382 Final Project
+===================
 
