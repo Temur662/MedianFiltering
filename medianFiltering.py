@@ -1,19 +1,31 @@
-import orderStatistic as orderStat
-import os 
-import glob
-import cv2 as cv
-import numpy as np
-from PIL import Image as img
+# Import necessary modules
+import os  # Provides functions for interacting with the operating system
+import glob  # For file pattern matching
+import cv2 as cv  # OpenCV library for computer vision tasks
+import numpy as np  # Library for numerical computations
+from PIL import Image as img  # Python Imaging Library for working with images
 
-import numpy as np
+# Import custom module for order statistics
+import orderStatistic as orderStat  
 
-import numpy as np
-
+# Define a function to extract an n x n subarray around a given pixel from a 2D array
 def extract_nxn_subarray(arr, i, j, n):
+    """
+    Extracts an n x n subarray around a given pixel from a 2D array.
+
+    Parameters:
+        arr (numpy.ndarray): The input 2D array.
+        i (int): Row index of the center pixel.
+        j (int): Column index of the center pixel.
+        n (int): Size of the subarray (n x n).
+
+    Returns:
+        numpy.ndarray: The extracted n x n subarray.
+    """
     # Get the dimensions of the original array
     rows, cols = arr.shape
     
-    # Calculate the half size to determine range around the center
+    # Calculate the half size to determine the range around the center
     half_n = n // 2
     
     # Calculate start and end indices for rows and columns
@@ -37,25 +49,57 @@ def extract_nxn_subarray(arr, i, j, n):
                            mode='constant', constant_values=0)
     return sub_array
 
+# Define a function to filter images using order statistics
 def filterImage():
+    """
+    Filters images using order statistics and saves the filtered results.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
+    # Define the path where images are stored
     path = "/Users/temursayfutdinov/Documents/CompSci/CSC382(Algorithms)/Project1/pics/*.*"
+    
+    # Get the size of the window for filtering from user input
     windowSize = int(input("What size window would you like to filter by: "))
+    
+    # Initialize image number
     imgNum = 0
+    
+    # Iterate over each image in the specified path
     for file in glob.glob(pathname=path):
+        # Open the image file
         theImage = img.open(file)
+        
+        # Convert the image to a numpy array
         imgArr = np.array(theImage)
-        if (len(imgArr.shape)) >= 3:
+        
+        # If the image has multiple channels, reshape it to a 2D array
+        if len(imgArr.shape) >= 3:
             imgArr = imgArr.reshape(imgArr.shape[0], -1).T
+        
+        # Iterate over each pixel in the image
         for pixelRow in range(len(imgArr)):
             for pixelCol in range(len(imgArr[pixelRow])):
+                # Extract the n x n box around the current pixel
                 nByNBox = extract_nxn_subarray(imgArr, pixelRow, pixelCol, windowSize)
-                # Use flatten method to turn 2d array into 1d array for filtering
+                # Use flatten method to turn 2D array into 1D array for filtering
                 nByNBox = nByNBox.flatten()
-                imgArr[pixelRow,pixelCol] = orderStat.orderStatistics(nByNBox, len(nByNBox) // 2)
-        filterdImage = img.fromarray(imgArr)
-        filterdImage.save(f"/Users/temursayfutdinov/Documents/CompSci/CSC382(Algorithms)/Project1/filteredResults/{imgNum}.png")
-        imgNum += 1
+                # Apply order statistics to the n x n box and assign the result to the current pixel
+                imgArr[pixelRow, pixelCol] = orderStat.orderStatistics(nByNBox, len(nByNBox) // 2)
         
+        # Convert the filtered array back to an image
+        filteredImage = img.fromarray(imgArr)
+        
+        # Save the filtered image to a specific folder with a numbered filename
+        filteredImage.save(f"/Users/temursayfutdinov/Documents/CompSci/CSC382(Algorithms)/Project1/filteredResults/test/{imgNum}.png")
+        
+        # Increment image number for the next image
+        imgNum += 1
+
+# Entry point of the program
 if __name__ == "__main__":
     filterImage()
-    
