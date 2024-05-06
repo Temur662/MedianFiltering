@@ -115,7 +115,7 @@ def runTests():
             print(runTimeArr[i], file=file)
 
 # Function to get average runtime for each test case
-def getAverage():
+    def getAverage():
     """
     Runs tests to get the average runtime of orderStatistics function.
 
@@ -125,4 +125,57 @@ def getAverage():
     Returns:
         None
     """
+    # Initialize an empty list to store runtime information
     runTimeArr = []
+        
+        # Define the sample sizes and population sizes for testing
+    sampleSizeN = [100, 300, 500, 1000, 2000, 4000, 5000, 8000, 10000]
+    populationSizeN = [100, 300, 500, 1000, 2000, 4000]
+        
+        # Loop over each sample size
+    for n in range(len(sampleSizeN)):
+        print("|=================================================================================|")
+            
+            # Loop over each population size
+        for popN in range(len(populationSizeN)):
+            print(f"For Sample Size: {sampleSizeN[n]} and Population Size: {populationSizeN[popN]}")
+            
+                # Generate a random array of integers within the specified population size
+            theArray = [random.randint(1, populationSizeN[popN]) for x in range(sampleSizeN[n])]
+                
+                # Initialize a variable to store the total runtime for each sample
+            totalRunTime = 0
+                
+                # Perform tests for each sample
+            for ith in range(5):
+                i = random.randint(0, sampleSizeN[n])
+                print("Find ith number:", i + 1, "(th/rd) number")
+                    
+                    # Measure the start time of the test
+                start = time.process_time()
+                    
+                    # Find the ith order statistic in the array
+                theIthNum = orderStatistics(theArray, i)
+                    
+                    # Measure the end time of the test
+                end = time.process_time()
+                    
+                    # Calculate the runtime of the test
+                timeTook = end - start
+                    
+                    # Accumulate the total runtime
+                totalRunTime += timeTook
+                    
+                    # Print the result and runtime of the test
+                print("The", i + 1, "(th/rd) number is", theIthNum)
+                print(f"RunTime =  {round(timeTook, 4)} Seconds")
+            
+                # Calculate the average runtime for the sample and append it to the runtime list
+            runTimeArr.append(f"{sampleSizeN[n]}, {populationSizeN[popN]},{round(totalRunTime/5, 4)}" )
+            print("|=================================================================================|")
+        
+        # Write the average runtime information to a CSV file
+    with open("avgRunTime.csv", "w") as file:
+        for i in range(len(runTimeArr)):
+            print(runTimeArr[i], file=file)
+
