@@ -40,8 +40,8 @@ def extract_nxn_subarray(arr, i, j, n):
 def filterImage():
     path = "/Users/temursayfutdinov/Documents/CompSci/CSC382(Algorithms)/Project1/pics/*.*"
     windowSize = int(input("What size window would you like to filter by: "))
+    imgNum = 0
     for file in glob.glob(pathname=path):
-        imgNum = 0
         theImage = img.open(file)
         imgArr = np.array(theImage)
         if (len(imgArr.shape)) >= 3:
@@ -53,8 +53,8 @@ def filterImage():
                 nByNBox = nByNBox.flatten()
                 imgArr[pixelRow,pixelCol] = orderStat.orderStatistics(nByNBox, len(nByNBox) // 2)
         filterdImage = img.fromarray(imgArr)
-        filterdImage.show()
-        
+        filterdImage.save(f"/Users/temursayfutdinov/Documents/CompSci/CSC382(Algorithms)/Project1/filteredResults/{imgNum}.png")
+        imgNum += 1
         
 if __name__ == "__main__":
     filterImage()

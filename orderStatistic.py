@@ -48,6 +48,7 @@ def orderStatistics(arr, i):
 
 
 def runTests():
+    runTimeArr = []
     sampleSizeN = [100, 300, 500, 1000, 2000, 4000, 5000, 8000, 10000]
     populationSizeN = [100, 300, 500, 1000, 2000, 4000]
     for n in range(len(sampleSizeN)):
@@ -55,16 +56,44 @@ def runTests():
         for popN in range(len(populationSizeN)):
             print(f"For Sample Size: {sampleSizeN[n]} and Population Size: {populationSizeN[popN]}")
             theArray = [random.randint(1, populationSizeN[popN]) for x in range(sampleSizeN[n])]
-            for ith in range(6):
+            for ith in range(5):
                 i = random.randint(0, sampleSizeN[n])
                 print("Find ith number:", i + 1, "(th/rd) number")
-                start = time.time()
+                start = time.process_time()
                 theIthNum = orderStatistics(theArray, i)
-                timeTook = start - time.time()
-        
+                end = time.process_time()
+                timeTook = end - start
+                runTimeArr.append(f"{sampleSizeN[n]}, {populationSizeN[popN]}, {i + 1}, {round(timeTook, 4)}" )
+    with open("runTime.csv", "w") as file:
+        for i in range(len(runTimeArr)):
+            print(runTimeArr[i], file=file)
+
+
+def getAverage():
+    runTimeArr = []
+    sampleSizeN = [100, 300, 500, 1000, 2000, 4000, 5000, 8000, 10000]
+    populationSizeN = [100, 300, 500, 1000, 2000, 4000]
+    for n in range(len(sampleSizeN)):
+        print("|=================================================================================|")
+        for popN in range(len(populationSizeN)):
+            print(f"For Sample Size: {sampleSizeN[n]} and Population Size: {populationSizeN[popN]}")
+            theArray = [random.randint(1, populationSizeN[popN]) for x in range(sampleSizeN[n])]
+            totalRunTime = 0
+            for ith in range(5):
+                i = random.randint(0, sampleSizeN[n])
+                print("Find ith number:", i + 1, "(th/rd) number")
+                start = time.process_time()
+                theIthNum = orderStatistics(theArray, i)
+                end = time.process_time()
+                timeTook = end - start
+                totalRunTime += timeTook
                 print("The", i + 1, "(th/rd) number is", theIthNum)
                 print(f"RunTime =  {round(timeTook, 4)} Seconds")
+            runTimeArr.append(f"{sampleSizeN[n]}, {populationSizeN[popN]},{round(totalRunTime/5, 4)}" )
             print("|=================================================================================|")
-
+    with open("avgRunTime.csv", "w") as file:
+        for i in range(len(runTimeArr)):
+            print(runTimeArr[i], file=file)
+    #print(runTimeArr)
 if __name__ == "__main__":
-    runTests()
+    getAverage()
