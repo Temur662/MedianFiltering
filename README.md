@@ -5,4 +5,4 @@ CSC382 Final Project
 ---------------------------
 
 1) Run Time for all combination of n and N.
-!(https://github.com/Temur662/MedianFiltering/CSC382AvgRunTimeGraph.png)
+!(https://github.com/Temur662/MedianFiltering/blob/main/CSC382AvgRunTimeGraph.png)
