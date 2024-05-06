@@ -12,4 +12,4 @@ Results For Median Filtering Images
 -----------------------------------
 
 1) Lions!
-   ![](https://github.com/Temur662/MedianFiltering/blob/main/pics/Lions.png)  ![](https://github.com/Temur662/MedianFiltering/blob/main/filteredResults/3.png)
+   ![](https://github.com/Temur662/MedianFiltering/blob/main/pics/Lions.png) |![](https://github.com/Temur662/MedianFiltering/blob/main/filteredResults/3.png)
