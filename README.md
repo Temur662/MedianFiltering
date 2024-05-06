@@ -5,8 +5,8 @@ Order Statistic Algorithm
 ---------------------------
 
 1) Run Time for all combination of n and N.
-  ![https://www.canva.com/design/DAF9L9m6cMk/Tj1pmhV5qKzXluBXy5g3gg/edit?utm_content=DAF9L9m6cMk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton](https://github.com/Temur662/MedianFiltering/blob/main/CSC382AvgRunTimeGraph.png)
-
+  ![](https://github.com/Temur662/MedianFiltering/blob/main/CSC382AvgRunTimeGraph.png)
+[Link to Graph](https://www.canva.com/design/DAF9L9m6cMk/Tj1pmhV5qKzXluBXy5g3gg/edit?utm_content=DAF9L9m6cMk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 Results For Median Filtering Images
 -----------------------------------
