@@ -10,6 +10,11 @@ Order Statistic Algorithm
 
 Results For Median Filtering Images
 -----------------------------------
+I used .png files for this project that i found online and Using Python libraries such as:
+Python Imaging Library: to extract images and save images 
+Numpy: to turn the image into a numpy array that we can run our order stat algorithim on 
+glob: to acess my files and operating system
+
 
 1) Lions!
     
